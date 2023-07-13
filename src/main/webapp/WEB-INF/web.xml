@@ -4,6 +4,17 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+
+  <!-- context-param은 filter보다 위에 설정해야된다 -->
+  <context-param>
+    <param-name>contextClass</param-name>
+    <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+  </context-param>
+
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>me.kktrkkt.servlet_demo.ioc_container.AppConfig</param-value>
+  </context-param>
   
   <filter>
     <filter-name>myFilter</filter-name>
@@ -18,6 +29,17 @@
   <listener>
     <listener-class>me.kktrkkt.servlet_demo.MyListener</listener-class>
   </listener>
+
+  <!-- ServletContext에 Application Context를 로드한다.  -->
+  <!-- WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE 이름으로 Application Context를 꺼낼수 있다 -->
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+
+  <servlet>
+    <servlet-name>dispather-servlet</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+  </servlet>
 
   <servlet>
     <servlet-name>hello</servlet-name>
