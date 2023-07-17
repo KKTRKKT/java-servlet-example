@@ -16,39 +16,57 @@
     <param-value>me.kktrkkt.servlet_demo.ioc_container.AppConfig</param-value>
   </context-param>
   
-  <filter>
-    <filter-name>myFilter</filter-name>
-    <filter-class>me.kktrkkt.servlet_demo.MyFilter</filter-class>
-  </filter>
-
-  <filter-mapping>
-    <filter-name>myFilter</filter-name>
-    <servlet-name>hello</servlet-name>
-  </filter-mapping>
-  
   <listener>
     <listener-class>me.kktrkkt.servlet_demo.MyListener</listener-class>
   </listener>
 
   <!-- ServletContext에 Application Context를 로드한다.  -->
   <!-- WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE 이름으로 Application Context를 꺼낼수 있다 -->
+  <!-- 리스너를 등록하지 않으면 DispatcherServlet의 ApplicationContext가 Root ApplicationContext가 된다  -->
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
 
+  <!-- ApplicationContext 설정을 하지 않으면 리스너의 ApplicationContext가 들어오게된다 -->
   <servlet>
-    <servlet-name>dispather-servlet</servlet-name>
+    <servlet-name>dispatcher-servlet</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>contextClass</param-name>
+      <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+    </init-param>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>me.kktrkkt.servlet_demo.ioc_container.WebConfig</param-value>
+    </init-param>
   </servlet>
 
-  <servlet>
-    <servlet-name>hello</servlet-name>
-    <servlet-class>me.kktrkkt.servlet_demo.HelloServlet</servlet-class>
-  </servlet>
-
+  <!--dispatcherServlet FrontController 패턴을 통해 각 요청을 적절한 컨트롤러에 분배해주는 역할을 한다 -->
+  <!-- WebApplicationContext 구조를 상속받는 별개의 ApplicationContext를 가지고 있다 -->
+  <!-- (만약 다른 dispatcherServlet이 하나 더 등록될 경우 dispatcherServlet간에 데이터를 공유하기 위해서) -->
   <servlet-mapping>
-    <servlet-name>hello</servlet-name>
-    <url-pattern>/hello</url-pattern>
+    <servlet-name>dispatcher-servlet</servlet-name>
+    <url-pattern>/app/*</url-pattern>
   </servlet-mapping>
+
+<!--  <filter>-->
+<!--    <filter-name>myFilter</filter-name>-->
+<!--    <filter-class>me.kktrkkt.servlet_demo.MyFilter</filter-class>-->
+<!--  </filter>-->
+
+<!--  <filter-mapping>-->
+<!--    <filter-name>myFilter</filter-name>-->
+<!--    <servlet-name>hello</servlet-name>-->
+<!--  </filter-mapping>-->
+
+<!--  <servlet>-->
+<!--    <servlet-name>hello</servlet-name>-->
+<!--    <servlet-class>me.kktrkkt.servlet_demo.HelloServlet</servlet-class>-->
+<!--  </servlet>-->
+
+<!--  <servlet-mapping>-->
+<!--    <servlet-name>hello</servlet-name>-->
+<!--    <url-pattern>/hello</url-pattern>-->
+<!--  </servlet-mapping>-->
 
 </web-app>
