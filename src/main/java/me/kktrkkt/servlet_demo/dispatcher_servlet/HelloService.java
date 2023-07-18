@@ -1,4 +1,4 @@
-package me.kktrkkt.servlet_demo.ioc_container;
+package me.kktrkkt.servlet_demo.dispatcher_servlet;
 
 import org.springframework.stereotype.Service;
 

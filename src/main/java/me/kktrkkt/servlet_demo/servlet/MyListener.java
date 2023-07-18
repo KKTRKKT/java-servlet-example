@@ -1,4 +1,4 @@
-package me.kktrkkt.servlet_demo;
+package me.kktrkkt.servlet_demo.servlet;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
