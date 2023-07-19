@@ -42,7 +42,7 @@
   <!-- (만약 다른 dispatcherServlet이 하나 더 등록될 경우 dispatcherServlet간에 데이터를 공유하기 위해서) -->
   <servlet-mapping>
     <servlet-name>dispatcher-servlet</servlet-name>
-    <url-pattern>/*</url-pattern>
+    <url-pattern>/app/*</url-pattern>
   </servlet-mapping>
 
 </web-app>
