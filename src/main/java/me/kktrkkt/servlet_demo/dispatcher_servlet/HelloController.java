@@ -21,6 +21,6 @@ public class HelloController {
     @GetMapping("/sample")
     public String sample(){
         // viewResolver가 ModelAndView에 담아서 리턴해준다
-        return "/WEB-INF/templates/sample.jsp";
+        return "templates/sample";
     }
 }
